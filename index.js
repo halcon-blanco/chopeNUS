@@ -3,38 +3,69 @@ const {
     Markup
 } = require('telegraf')
 
-//web links
+const open = require('open')
 
-const SPORTS = "https://reboks.nus.edu.sg/nus_public_web/public/"
-const UTOWN = "https://uci.nus.edu.sg/suu/facilities-booking/facilities-booking-utown-non-residential-facilities/"
-const LIBRARIES = "https://libportal.nus.edu.sg/frontend/web/bookdiscussionroom"
+const API_TOKEN = '1547617487:AAFd7SY_CnefKeC5DJ_sqI9LX0xCUNvt0O8'
+
+//web links
+const SPORTS_URL = "https://reboks.nus.edu.sg/nus_public_web/public/"
+const UTOWN_URL = "https://uci.nus.edu.sg/suu/facilities-booking/facilities-booking-utown-non-residential-facilities/"
+const LIBRARIES_URL = "https://aces.nus.edu.sg/fbs/ADFSLogin"
 const WEB_VPN = "https://webvpn.nus.edu.sg/dana-na/auth/url_default/welcome.cgi"
 // can use for web-scraping for schedule later as an e.g. (computing facilities)
 const COM_SCHEDULE = "https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?"
 
-const bot = new Telegraf('1547617487:AAFd7SY_CnefKeC5DJ_sqI9LX0xCUNvt0O8')
+const STUDY_BUTTON_NAME = "study"
+
+const bot = new Telegraf(API_TOKEN)
 
 
 bot.start(ctx => {
-    ctx.reply('');
-
-    const buttons = Markup.inlineKeyboard([
-        [Markup.callbackButton('FOE', 'foe'), Markup.callbackButton('Music', 'music'), Markup.callbackButton('Medicine', 'med'), Markup.callbackButton('YIH', 'yih')],
-        [Markup.callbackButton('UTown', 'utown'), Markup.callbackButton('FOE', 'foe'), Markup.callbackButton('FASS', 'fass'), Markup.callbackButton('SOC', 'soc')],
-        [Markup.callbackButton('FOS', 'fos'), Markup.callbackButton('SDE', 'sde'), Markup.callbackButton('Law', 'law')]
-    ]);
 
     ctx.telegram.sendMessage(ctx.chat.id, "Welcome to ChopeNUS! Which type of facility do you want to book?", {
-        reply_markup: buttons
-    })
-
+        reply_markup: JSON.stringify({
+            inline_keyboard: [
+                [
+                    { text: 'Study', callback_data: STUDY_BUTTON_NAME },
+                    { text: 'Sports', url: SPORTS_URL}
+                ]
+            ]
+        })
+    });
 
 });
 
 bot.on('callback_query', ctx => {
-    ctx.reply("it works! Now lets get started lol");
+    if (ctx.callbackQuery.data === STUDY_BUTTON_NAME) {
+        handleStudyButton(ctx)
+    }
+    // } else if (ctx.callbackQuery.data === SPORTS_BUTTON_NAME) {
+    //     handleSportsButton()
+    // } else if (ctx.callbackQuery.data === STUDY_ROOMS_BUTTON_NAME) {
+    //     handleStudyRoomsButton()
+    // } else if (ctx.callbackQuery.data === UTOWN_BUTTON_NAME) {
+    //     handleUtownButton()
+    // }
 
     ctx.answerCbQuery()
-})
+});
+
+function handleStudyButton(ctx) {
+
+    study_buttons = {
+        inline_keyboard: [
+            [
+                { text: 'Study Rooms', url: LIBRARIES_URL},
+                { text: 'UTown', url: UTOWN_URL}
+            ]
+        ]
+    };
+
+    ctx.telegram.sendMessage(ctx.chat.id, "Where do you want to study?", {
+        reply_markup: JSON.stringify(study_buttons)
+    });
+}
+
+
 
 bot.launch()
