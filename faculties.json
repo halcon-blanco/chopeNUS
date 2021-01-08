@@ -37,7 +37,7 @@
     "UTown": [
         [
             { "text": "Mac Commons", "callback_data": "maccommons" },
-            { "text": "PC commons", "callback_data":"pccomms" }
+            { "text": "PC commons", "callback_data":"pccommons" }
         ],
         [
             { "text": "Ian & Peony Ferguson Study", "callback_data":"ian&peony" },
