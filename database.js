@@ -6,7 +6,8 @@ const devConfig = {
    user : process.env.PG_USER,
    host: process.env.PG_HOST,
    database: process.env.PG_DATABASE,
-   port:process.env.PORT
+   port:process.env.PORT,
+   ssl : true
 };
 
 const proConfing = {
