@@ -1,6 +1,6 @@
 const Telegraf = require('telegraf');
 const pool = require('./database');
-
+require('dotenv').config();
 
 const facData = require('./faculties.json')
 
