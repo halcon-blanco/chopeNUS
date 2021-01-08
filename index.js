@@ -21,4 +21,10 @@ bot.start(ctx => {
 
 });
 
+bot.on('callback_query', ctx => {
+    ctx.reply("test");
+
+    ctx.answerCbQuery()
+})
+
 bot.launch()
