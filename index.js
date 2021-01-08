@@ -69,21 +69,6 @@ bot.on('callback_query', async ctx => {
         ctx.telegram.sendMessage(ctx.chat.id, message, {
             reply_markup: JSON.stringify(newButtons)
         })
-
-
-
-
-
-        // newReplyMarkup = {
-        //     inline_keyboard: [
-        //         [{
-        //             text: "sth",
-        //             callback_data: "sth"
-        //         }]
-        //     ]
-        // }
-        //
-        // newMessage = await ctx.telegram.editMessageReplyMarkup(chatId = ctx.chat.id, messageId = message.message_id, markup=JSON.stringify(newReplyMarkup))
     }
 
     ctx.answerCbQuery()
@@ -97,6 +82,20 @@ bot.command('locationinfo', ctx => {
         })
     })
 
+})
+
+
+// TODO:
+
+bot.command('suggestedbookings', ctx => {
+    user_id = ctx.from.id;
+
+    // 1. check if the user_id is contained in the users database.
+    //      (a) if yes, then display the top 3 locations in the user's booking
+    //      (b) otherwise step 2
+    // 2. generate 3 random locations and time slots
+    // 3. add those time slots to the database for the user under user_id
+    // 4. display them
 })
 
 function handleStudyButton(ctx) {
@@ -156,6 +155,6 @@ async function get_individual_data(id){
     return Promise.resolve(data);
 }
 
-// get_individual_data('@umergta').then(x=>console.log(x));
+get_individual_data('@umergta').then(x=>console.log(x));
 
 bot.launch()
