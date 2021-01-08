@@ -10,15 +10,43 @@ app.listen(5000, ()=>{
     console.log("connected on port 5000");
 });
 
-app.get("/test", async(req,res)=>{
-    try {
-        const allEntries = await pool.query("SELECT * FROM bookings");
-        res.json(allEntries.rows);
+async function get_location_data(location_name, room){
+    let data = '';
+    if(typeof(room) === 'undefined'){
+        room = 'NULL';
     }
-     catch (error) {
-        console.error(error);
-    }
-});
+    let query = new Promise(async (resolve, reject) => {
+        await pool.query('SELECT * FROM bookings WHERE loc_name = $1 AND room = $2', [location_name, room], (error,response)=>{
+            
+            if(error){
+                console.log("error");
+            }
+            else{
+                // console.log(response.rows);
+                data = (response.rows);
+            }
+            resolve();
+        })
+    })
+    
+    await query
+    return Promise.resolve(data);
+}
+get_location_data('pccomms').then((val)=>console.log(val));
+
+async function get_individual_data(id){
+    let data = '';
+    let query = new Promise(async (resolve, reject) =>{
+        await pool.query('SELECT * FROM bookings WHERE chopeid = $1 ORDER BY book_time LIMIT 3', [id], (error, response)=>{
+            data = response.rows;
+            resolve();
+        })
+    })
+    await query;
+    return Promise.resolve(data);
+}
+
+get_individual_data('@umergta').then(x=>console.log(x));
 
 const open = require('open')
 
