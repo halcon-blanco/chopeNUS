@@ -24,8 +24,3 @@ CREATE TABLE bookings(
     FOREIGN KEY(fac_name, loc_name, room) REFERENCES booking_locations(faculty, location_name, room_name),
     PRIMARY KEY(fac_name, loc_name, room, chopeID, start_time, end_time)
 );
-
--- table insertions
-INSERT INTO booking_locations VALUES('pccommons', 'UTown');
-INSERT INTO chopers VALUES('@umergta', 'umer');
-INSERT INTO bookings VALUES('UTown', 'pccommons','room', '@umergta', '2020-01-08 20:24:01','2020-01-09 15:00:00', '2020-01-09 16:00:00');

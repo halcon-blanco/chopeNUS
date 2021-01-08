@@ -149,7 +149,12 @@ async function get_location_data(fac, location_name){
     //     room = 'NULL';
     // }
     let query = new Promise(async (resolve, reject) => {
-        await pool.query('SELECT * FROM bookings WHERE fac_name = $1 AND loc_name = $2', [fac, location_name], (error,response)=>{
+        await pool.query(`SELECT fac_name,loc_name,start_time, end_time, COUNT(*) AS book_count
+        FROM bookings 
+        where fac_name = $1 and loc_name = $2 
+        GROUP BY fac_name, loc_name, start_time, end_time
+        ORDER BY book_count DESC
+        LIMIT 3;`, [fac, location_name], (error,response)=>{
             if(error){
                 console.log("error");
             }
@@ -164,7 +169,7 @@ async function get_location_data(fac, location_name){
     await query
     return Promise.resolve(data);
 }
-//get_location_data('UTown', 'pccommons').then((val)=>console.log(val));
+get_location_data('UTown', 'pccommons').then((val)=>console.log(val));
 
 async function get_individual_data(id){
     let data = '';
@@ -178,6 +183,6 @@ async function get_individual_data(id){
     return Promise.resolve(data);
 }
 
-get_individual_data('@umergta').then(x=>console.log(x));
+get_individual_data('1234567').then(x=>console.log(x));
 
 bot.launch()
