@@ -10,8 +10,17 @@ bot.start(ctx => {
     ctx.reply('Welcome to ChopeNUS! Which type of facility do you want to book?');
 
     const buttons = Markup.inlineKeyboard([
-        [Markup.callbackButton('Test', 'test')],
-        [Markup.callbackButton('Test 2', 'test2')]
+        [Markup.callbackButton('FOE', 'foe')],
+        [Markup.callbackButton('Music', 'music')],
+        [Markup.callbackButton('Medicine', 'med')],
+        [Markup.callbackButton('YIH', 'yih')],
+        [Markup.callbackButton('UTown', 'utown')],
+        [Markup.callbackButton('FOE', 'foe')],
+        [Markup.callbackButton('FASS', 'fass')],
+        [Markup.callbackButton('SOC', 'soc')],
+        [Markup.callbackButton('FOS', 'fos')],
+        [Markup.callbackButton('SDE', 'sde')],
+        [Markup.callbackButton('Law', 'law')],
     ]);
 
     ctx.telegram.sendMessage(ctx.chat.id, "test", {
