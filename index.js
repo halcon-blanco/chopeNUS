@@ -1,14 +1,6 @@
 const Telegraf = require('telegraf');
-const express = require('express');
-const app = express();
-const cors = require('cors');
 const pool = require('./database');
-//middleware
-app.use(cors());
-app.use(express.json()); //req.body
-app.listen(5000, ()=>{
-    console.log("connected on port 5000");
-});
+
 
 async function get_location_data(location_name, room){
     let data = '';
@@ -32,7 +24,7 @@ async function get_location_data(location_name, room){
     await query
     return Promise.resolve(data);
 }
-get_location_data('pccomms').then((val)=>console.log(val));
+// get_location_data('pccomms').then((val)=>console.log(val));
 
 async function get_individual_data(id){
     let data = '';
@@ -46,7 +38,7 @@ async function get_individual_data(id){
     return Promise.resolve(data);
 }
 
-get_individual_data('@umergta').then(x=>console.log(x));
+// get_individual_data('@umergta').then(x=>console.log(x));
 
 const open = require('open')
 
@@ -71,9 +63,6 @@ const WELCOME_MESSAGE = "Welcome to ChopeNUS! Which type of facility do you want
     "Rememeber to be logged in to NUS WiFi or use NUS VPN: " + WEB_VPN
 
 const bot = new Telegraf(API_TOKEN)
-
-let messagePromise; // represents message sent on location_info command
-
 
 bot.start(ctx => {
 
@@ -101,17 +90,19 @@ bot.on('callback_query', async ctx => {
         handleStudyButton(ctx)
     } else if (ctx.callbackQuery.data.startsWith(FACULTY_IDENTIFIER)) {
 
-        message = await messagePromise
-
         fac = ctx.callbackQuery.data.slice(FACULTY_IDENTIFIER.length).trim()
 
-        newButtons = {
-            inline_keyboard: facData[fac]
+        let message = "No facilities here :(";
+        let newButtons;
+
+        if (facData[fac] !== undefined) {
+            message = "Which facility?"
+            newButtons = {
+                    inline_keyboard: facData[fac]
+            }
         }
 
-        console.log(newButtons);
-
-        ctx.telegram.sendMessage(ctx.chat.id, "Which facility?", {
+        ctx.telegram.sendMessage(ctx.chat.id, message, {
             reply_markup: JSON.stringify(newButtons)
         })
 
@@ -132,8 +123,6 @@ bot.on('callback_query', async ctx => {
     }
 
     ctx.answerCbQuery()
-
-    console.log("heyy");
 });
 
 bot.command('locationinfo', ctx => {
