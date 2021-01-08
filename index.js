@@ -150,7 +150,8 @@ async function get_location_data(fac, location_name){
         ORDER BY book_count DESC
         LIMIT 3;`, [fac, location_name], (error,response)=>{
             if(error){
-                console.log("error");
+                console.log("error in get_location method");
+                console.log(error.message);
             }
             else{
                 // console.log(response.rows);
@@ -165,22 +166,22 @@ async function get_location_data(fac, location_name){
 }
 // get_location_data('UTown', 'pccommons').then((val)=>console.log(val));
 
-async function get_individual_data(id){
-    let data = '';
-    let query = new Promise(async (resolve, reject) =>{
-        await pool.query('SELECT * FROM bookings WHERE chopeid = $1 ORDER BY book_time LIMIT 3', [id], (error, response)=>{
-            if(error){
-                console.log("error");
-            }
-            else{
-                data = response.rows; 
-            }
-            resolve();
-        })
-    })
-    await query;
-    return Promise.resolve(data);
-}
+// async function get_individual_data(id){
+//     let data = '';
+//     let query = new Promise(async (resolve, reject) =>{
+//         await pool.query('SELECT * FROM bookings WHERE chopeid = $1 ORDER BY book_time LIMIT 3', [id], (error, response)=>{
+//             if(error){
+//                 console.log("error");
+//             }
+//             else{
+//                 data = response.rows; 
+//             }
+//             resolve();
+//         })
+//     })
+//     await query;
+//     return Promise.resolve(data);
+// }
 
 // get_individual_data('1234567').then(x=>console.log(x));
 
