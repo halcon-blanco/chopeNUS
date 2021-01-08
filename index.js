@@ -5,7 +5,8 @@ const pool = require('./database');
 const facData = require('./faculties.json')
 
 const FACULTIES = facData["faculties"]
-const API_TOKEN = "1547617487:AAFd7SY_CnefKeC5DJ_sqI9LX0xCUNvt0O8";
+const API_TOKEN = process.env.API_TOKEN;
+console.log(API_TOKEN);
 //web links
 const SPORTS_URL = "https://reboks.nus.edu.sg/nus_public_web/public/"
 const UTOWN_URL = "https://uci.nus.edu.sg/suu/facilities-booking/facilities-booking-utown-non-residential-facilities/"
