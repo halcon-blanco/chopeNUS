@@ -22,26 +22,26 @@
 
     "FASS": [
         [
-            { "text": "Discussion Rooms", "callback_data": "discussion-rooms"},
-            { "text": "LT foyers", "callback_data": "lt-foyers" }
+            { "text": "Discussion Rooms", "callback_data": "cluster discussion-rooms FASS"},
+            { "text": "LT foyers", "callback_data": "cluster lt-foyers FASS" }
         ]
     ],
 
     "FOS": [
         [
-            { "text": "Meeting Rooms", "callback_data": "fos-meeting-rooms" },
-            { "text": "Open Space", "callback_data": "open-space" },
-            { "text": "LT foyers", "callback_data": "lt-foyers" }
+            { "text": "Meeting Rooms", "callback_data": "cluster fos-meeting-rooms FOS" },
+            { "text": "Open Space", "callback_data": "cluster open-space FOS" },
+            { "text": "LT foyers", "callback_data": "cluster lt-foyers FOS" }
         ]
     ],
     "UTown": [
         [
-            { "text": "Mac Commons", "callback_data": "maccommons" },
-            { "text": "PC commons", "callback_data":"pccommons" }
+            { "text": "Mac Commons", "callback_data": "cluster maccommons UTown" },
+            { "text": "PC commons", "callback_data":"cluster pccommons UTown" }
         ],
         [
-            { "text": "Ian & Peony Ferguson Study", "callback_data":"ian&peony" },
-            { "text":"Utown meeting rooms", "callback_data":"utown-meeting-rooms" }
+            { "text": "Ian & Peony Ferguson Study", "callback_data":"cluster ian&peony UTown" },
+            { "text":"Utown meeting rooms", "callback_data":"cluster utown-meeting-rooms UTown" }
         ]
     ]
 

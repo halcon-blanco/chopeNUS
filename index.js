@@ -22,6 +22,7 @@ const COM_SCHEDULE = "https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?"
 
 const STUDY_BUTTON_NAME = "study"
 const FACULTY_IDENTIFIER = "faculty"
+const CLUSTER_IDENTIFIER = "cluster"
 
 const WELCOME_MESSAGE = "Welcome to ChopeNUS! Which type of facility do you want to book?\n\n" +
     "Rememeber to be logged in to NUS WiFi or use NUS VPN: " + WEB_VPN
@@ -69,6 +70,28 @@ bot.on('callback_query', async ctx => {
         ctx.telegram.sendMessage(ctx.chat.id, message, {
             reply_markup: JSON.stringify(newButtons)
         })
+    } else if (ctx.callbackQuery.data.startsWith(CLUSTER_IDENTIFIER)) {
+
+        data = ctx.callbackQuery.data.slice(CLUSTER_IDENTIFIER.length).trim().split()
+
+        cluster = data[0]
+        fac = data[1]
+
+        topDays = await get_location_data(fac, cluster)
+
+        let message = fac + ", " + cluster + ": Most busy slots in the past month are\n\n";
+
+        for topDay of topDays {
+            let fullDate = new Date(Date.parse(topDay.start_time))
+
+            let date = fullDate.getDate()
+            let time = fullDate.toLocaleTimeString()
+
+            message += date + " " + time + "\n"
+        }
+
+        ctx.reply(message)
+
     }
 
     ctx.answerCbQuery()
