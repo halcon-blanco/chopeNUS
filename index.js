@@ -14,7 +14,8 @@ app.get("/test", async(req,res)=>{
     try {
         const allEntries = await pool.query("SELECT * FROM bookings");
         res.json(allEntries.rows);
-    } catch (error) {
+    }
+     catch (error) {
         console.error(error);
     }
 });

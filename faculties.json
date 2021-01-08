@@ -28,17 +28,27 @@
 
     "FOS": [
         [
-            { "text": "Meeting Rooms", "callback_data": "Meeting Rooms" }
+            { "text": "Meeting Rooms", "callback_data": "fos-meeting-rooms" },
+            { "text": "Open Space", "callback_data": "open-space" }
+
+        ]
+    ],
+    "UTOWN": [
+        [
+            { "text": "Mac Commons", "callback_data": "maccommons" },
+            { "text": "PC commons", "callback_data":"pccomms" }
         ],
         [
-            { "text": "Open Space", "callback_data": "Open Space" }
+            { "text": "Ian & Peony Ferguson Study", "callback_data":"ian&peony" },
+            { "text":"Utown meeting rooms", "callback_data":"utown-meeting-rooms" }
+        ]
+    ],
+    "LT-FOYERS": [
+        [
+            {"text": "LT foyers", "callback_data": "lt-foyers" }
         ]
     ]
 
 }
 
-"Meeting Rooms (Edurec)",
-"LT Foyers",
-"Ian & Peony Ferguson Study",
-"Mac Commons",
-"PC Commons"
+
