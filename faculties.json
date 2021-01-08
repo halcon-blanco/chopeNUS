@@ -1,20 +1,44 @@
+{
+    "faculties": [
+        [
+            { "text": "FOE", "callback_data": "faculty" },
+            { "text": "Music", "callback_data": "faculty" },
+            { "text": "Medicine", "callback_data": "faculty" },
+            { "text": "YIH", "callback_data": "faculty" }
+        ],
+        [
+            { "text": "UTown", "callback_data": "faculty UTown" },
+            { "text": "FOE", "callback_data": "faculty" },
+            { "text": "FASS", "callback_data": "faculty" },
+            { "text": "SOC", "callback_data": "faculty" }
+        ],
+        [
+            { "text": "FOS", "callback_data": "faculty" },
+            { "text": "SDE", "callback_data": "faculty" },
+            { "text": "Law", "callback_data": "faculty" },
+            { "text": "USC", "callback_data": "faculty"}
+        ]
+    ],
 
-[
-    [
-        { "text": "FOE", "callback_data": "none" },
-        { "text": "Music", "callback_data": "none" },
-        { "text": "Medicine", "callback_data": "none" },
-        { "text": "YIH", "callback_data": "none" }
+    "FASS": [
+        [
+            { "text": "Discussion Rooms", "callback_data": "Discussion Rooms"}
+        ]
     ],
-    [
-        { "text": "UTown", "callback_data": "none" },
-        { "text": "FOE", "callback_data": "none" },
-        { "text": "FASS", "callback_data": "none" },
-        { "text": "SOC", "callback_data": "none" }
-    ],
-    [
-        { "text": "FOS", "callback_data": "none" },
-        { "text": "SDE", "callback_data": "none" },
-        { "text": "Law", "callback_data": "none" }
+
+    "FOS": [
+        [
+            { "text": "Meeting Rooms", "callback_data": "Meeting Rooms" }
+        ],
+        [
+            { "text": "Open Space", "callback_data": "Open Space" }
+        ]
     ]
-]
+
+}
+
+"Meeting Rooms (Edurec)",
+"LT Foyers",
+"Ian & Peony Ferguson Study",
+"Mac Commons",
+"PC Commons"
