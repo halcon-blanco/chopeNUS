@@ -2,6 +2,25 @@ const {
     Telegraf,
     Markup
 } = require('telegraf')
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const pool = require('./database');
+//middleware
+app.use(cors());
+app.use(express.json()); //req.body
+app.listen(5000, ()=>{
+    console.log("connected on port 5000");
+});
+
+app.get("/test", async(req,res)=>{
+    try {
+        const allEntries = await pool.query("SELECT * FROM bookings");
+        res.json(allEntries.rows);
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 const open = require('open')
 
@@ -21,12 +40,12 @@ const bot = new Telegraf(API_TOKEN)
 
 
 bot.start(ctx => {
-
     ctx.telegram.sendMessage(ctx.chat.id, "Welcome to ChopeNUS! Which type of facility do you want to book?", {
         reply_markup: JSON.stringify({
             inline_keyboard: [
                 [
                     { text: 'Study', callback_data: STUDY_BUTTON_NAME },
+                    // {text: 'Libraries', url: LIBRARIES_URL},
                     { text: 'Sports', url: SPORTS_URL}
                 ]
             ]
