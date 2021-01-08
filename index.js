@@ -1,9 +1,8 @@
-const {
-    Telegraf,
-    Markup
-} = require('telegraf')
+const Telegraf = require('telegraf')
 
 const open = require('open')
+
+const FACULTIES = require('./faculties.json')
 
 const API_TOKEN = '1547617487:AAFd7SY_CnefKeC5DJ_sqI9LX0xCUNvt0O8'
 
@@ -17,12 +16,16 @@ const COM_SCHEDULE = "https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?"
 
 const STUDY_BUTTON_NAME = "study"
 
+const WELCOME_MESSAGE = "Welcome to ChopeNUS! Which type of facility do you want to book?\n\n" +
+                        "Rememeber to be logged in to NUS WiFi or use NUS VPN: " + WEB_VPN
+
 const bot = new Telegraf(API_TOKEN)
 
 
 bot.start(ctx => {
 
-    ctx.telegram.sendMessage(ctx.chat.id, "Welcome to ChopeNUS! Which type of facility do you want to book?", {
+    ctx.telegram.sendMessage(ctx.chat.id, WELCOME_MESSAGE, {
+        disable_web_page_preview: true,
         reply_markup: JSON.stringify({
             inline_keyboard: [
                 [
@@ -39,16 +42,19 @@ bot.on('callback_query', ctx => {
     if (ctx.callbackQuery.data === STUDY_BUTTON_NAME) {
         handleStudyButton(ctx)
     }
-    // } else if (ctx.callbackQuery.data === SPORTS_BUTTON_NAME) {
-    //     handleSportsButton()
-    // } else if (ctx.callbackQuery.data === STUDY_ROOMS_BUTTON_NAME) {
-    //     handleStudyRoomsButton()
-    // } else if (ctx.callbackQuery.data === UTOWN_BUTTON_NAME) {
-    //     handleUtownButton()
-    // }
 
     ctx.answerCbQuery()
 });
+
+bot.command('locationinfo', ctx => {
+
+    ctx.telegram.sendMessage(ctx.chat.id, "Which faculty is it in?", {
+        reply_markup: JSON.stringify({
+            inline_keyboard: FACULTIES
+        })
+    })
+
+})
 
 function handleStudyButton(ctx) {
 

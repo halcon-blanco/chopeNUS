@@ -1,0 +1,20 @@
+
+[
+    [
+        { "text": "FOE", "callback_data": "none" },
+        { "text": "Music", "callback_data": "none" },
+        { "text": "Medicine", "callback_data": "none" },
+        { "text": "YIH", "callback_data": "none" }
+    ],
+    [
+        { "text": "UTown", "callback_data": "none" },
+        { "text": "FOE", "callback_data": "none" },
+        { "text": "FASS", "callback_data": "none" },
+        { "text": "SOC", "callback_data": "none" }
+    ],
+    [
+        { "text": "FOS", "callback_data": "none" },
+        { "text": "SDE", "callback_data": "none" },
+        { "text": "Law", "callback_data": "none" }
+    ]
+]
