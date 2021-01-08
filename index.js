@@ -10,8 +10,7 @@ const facData = require('./faculties.json')
 
 const FACULTIES = facData["faculties"]
 
-const API_TOKEN = '1547617487:AAFd7SY_CnefKeC5DJ_sqI9LX0xCUNvt0O8'
-
+const API_TOKEN = process.env.API_TOKEN;
 //web links
 const SPORTS_URL = "https://reboks.nus.edu.sg/nus_public_web/public/"
 const UTOWN_URL = "https://uci.nus.edu.sg/suu/facilities-booking/facilities-booking-utown-non-residential-facilities/"
@@ -72,8 +71,8 @@ bot.on('callback_query', async ctx => {
         })
     } else if (ctx.callbackQuery.data.startsWith(CLUSTER_IDENTIFIER)) {
 
-        data = ctx.callbackQuery.data.slice(CLUSTER_IDENTIFIER.length).trim().split()
-
+        data = ctx.callbackQuery.data.slice(CLUSTER_IDENTIFIER.length).trim().split(" ");
+        console.log(data);
         cluster = data[0]
         fac = data[1]
 
@@ -81,10 +80,10 @@ bot.on('callback_query', async ctx => {
 
         let message = fac + ", " + cluster + ": Most busy slots in the past month are\n\n";
 
-        for topDay of topDays {
+        for (let topDay of topDays) {
             let fullDate = new Date(Date.parse(topDay.start_time))
 
-            let date = fullDate.getDate()
+            let date = fullDate.toDateString();
             let time = fullDate.toLocaleTimeString()
 
             message += date + " " + time + "\n"

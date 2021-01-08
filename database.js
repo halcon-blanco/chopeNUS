@@ -1,11 +1,17 @@
 const {Pool} = require('pg');
 const chopenus = require('pg').Pool;
+require("dotenv").config();
 
-const pool = new Pool({
-    "user":"postgres",
-    "host": "localhost",
-    "port": 5432,
-    "database": "chopenus"
-});
+const devConfig = {
+   user : process.env.PG_USER,
+   host: process.env.PG_HOST,
+   database: process.env.PG_DATABASE,
+   port:process.env.PORT
+};
+
+const proConfing = {
+    connectionString: process.env.DATABASE_URL
+}
+const pool = new Pool(process.env.NODE_ENV === 'production' ? proConfing : devConfig);
 
 module.exports = pool;
