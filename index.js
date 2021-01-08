@@ -1,7 +1,6 @@
 const Telegraf = require('telegraf');
 const pool = require('./database');
 
-const open = require('open')
 
 const facData = require('./faculties.json')
 
@@ -164,12 +163,15 @@ async function get_location_data(fac, location_name){
     await query
     return Promise.resolve(data);
 }
-get_location_data('UTown', 'pccommons').then((val)=>console.log(val));
+// get_location_data('UTown', 'pccommons').then((val)=>console.log(val));
 
 async function get_individual_data(id){
     let data = '';
     let query = new Promise(async (resolve, reject) =>{
         await pool.query('SELECT * FROM bookings WHERE chopeid = $1 ORDER BY book_time LIMIT 3', [id], (error, response)=>{
+            if(error){
+                console.log("error");
+            }
             data = response.rows;
             resolve();
         })
@@ -178,6 +180,6 @@ async function get_individual_data(id){
     return Promise.resolve(data);
 }
 
-get_individual_data('1234567').then(x=>console.log(x));
+// get_individual_data('1234567').then(x=>console.log(x));
 
 bot.launch()
