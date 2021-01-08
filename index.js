@@ -172,7 +172,9 @@ async function get_individual_data(id){
             if(error){
                 console.log("error");
             }
-            data = response.rows;
+            else{
+                data = response.rows; 
+            }
             resolve();
         })
     })
