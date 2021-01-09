@@ -135,7 +135,7 @@ function handleStudyButton(ctx) {
     };
 
 
-    ctx.telegram.sendMessage(ctx.chat.id, "Where do you want to study?", {
+    ctx.telegram.sendMessage(ctx.chat.id, "Where do you wanna mug?", {
         reply_markup: JSON.stringify(study_buttons)
     });
 }
@@ -147,8 +147,8 @@ async function get_location_data(fac, location_name){
     // }
     let query = new Promise(async (resolve, reject) => {
         await pool.query(`SELECT fac_name,loc_name,start_time, end_time, COUNT(*) AS book_count
-        FROM bookings 
-        where fac_name = $1 and loc_name = $2 
+        FROM bookings
+        where fac_name = $1 and loc_name = $2
         GROUP BY fac_name, loc_name, start_time, end_time
         ORDER BY book_count DESC
         LIMIT 3;`, [fac, location_name], (error,response)=>{
