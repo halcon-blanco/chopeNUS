@@ -1,6 +1,7 @@
 const Telegraf = require('telegraf');
 const pool = require('./database');
-require('dotenv').config();
+const http = require('http');
+http.createServer((req,res) =>{}).listen(process.env.PORT || 3000);
 
 const facData = require('./faculties.json')
 
